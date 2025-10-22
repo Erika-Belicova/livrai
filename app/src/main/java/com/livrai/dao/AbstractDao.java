@@ -8,6 +8,9 @@ public class AbstractDao {
 
     private Connection connection;
 
+    private final String user = System.getenv("DATABASE_USERNAME");
+    private final String password = System.getenv("DATABASE_PASSWORD");
+
     private Connection getConnection() {
         if (connection == null) {
             loadDatabase();
@@ -30,7 +33,7 @@ public class AbstractDao {
         }
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/livrai", "root", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/livrai", user, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
